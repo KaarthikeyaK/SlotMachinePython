@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 MAX_LINES = 3
 MAX_BET = 100
@@ -28,6 +29,17 @@ def getSlotMachineSpin(rows, cols, symbols):
             currentSymbols.remove(value)
             column.append(value)
         columns.append(column)
+    return columns
+
+def printSlotMachine(columns):
+    # transposedColumns = np.array(columns).T.tolist()
+    # print(transposedColumns)
+    for row in range(len(columns[0])):
+        for i, column in enumerate(columns):
+            if i != len(columns) - 1:
+                print(column[row], "| ", end="")
+            else:
+                print(column[row])
 
 
 def deposit():
@@ -82,6 +94,8 @@ def main():
         else:
             break
     print(f"You are betting ${bet} on {lines} lines. Total bet is equal to: ${totalBet}")
-    print(balance, lines)
+    
+    slots = getSlotMachineSpin(ROWS, COLS, symbolCount)
+    printSlotMachine(slots)
 
 main()
