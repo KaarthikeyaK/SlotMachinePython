@@ -15,6 +15,29 @@ symbolCount = {
     "D": 8
 }
 
+symbolValue = {
+    "A": 5,
+    "B": 4,
+    "C": 3,
+    "D": 2
+}
+
+
+def checkWinnings(columns, lines, bet, values):
+    winnings = 0
+    winningLines = []
+    for line in range(lines):
+        symbol = columns[0][line]
+        for column in columns:
+            symbolToCheck = column[line]
+            if symbol != symbolToCheck:
+                break
+        else:
+            winnings += values[symbol] * bet
+            winningLines.append(line+1)
+    return winnings, winningLines
+
+
 def getSlotMachineSpin(rows, cols, symbols):
     allSymbols = []
     for symbol, symbolCount in symbols.items():
@@ -97,5 +120,8 @@ def main():
     
     slots = getSlotMachineSpin(ROWS, COLS, symbolCount)
     printSlotMachine(slots)
+    winnings, winningLines = checkWinnings(slots, lines, bet, symbolValue)
+    print(f"You won ${winnings}.")
+    print(f"You won on lines:", *winningLines)
 
 main()
