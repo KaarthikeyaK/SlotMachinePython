@@ -133,6 +133,6 @@ def main():
             break
         balance += int(spin(balance))
 
-    print("You left with ${balance}")
+    print(f"You left with ${balance}")
 
 main()
